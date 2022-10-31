@@ -1,0 +1,25 @@
+    # ==================================================================================================================
+    # Method: {{ converter_method_name }} to transform data from mqtt to a hana database
+    # ==================================================================================================================
+    @staticmethod
+    def {{ converter_method_name }}(mosq, obj, msg):
+        try:
+            payload = eval(str(msg.payload.decode("utf-8")))
+
+        {% for value in mqtt_payload_values %}
+            {{ value }}
+        {% endfor %}
+
+        {% for method in method_list %}
+            {{ method }}
+        {% endfor %}
+
+        {% for sep_method in sep_method_values %}
+            {{ sep_method.for }}
+                {{ sep_method.value }}
+                {{ sep_method.method }}
+        {% endfor %}
+        except Exception as e:
+            raise HanaInjectorError(
+                f"Maybe the values are not correct. Please check the error message"
+            ) from e

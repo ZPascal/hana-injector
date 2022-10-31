@@ -1,0 +1,60 @@
+hana_injector:
+  secret_key: "test"
+  log_mode: "debug"
+  template: "injector/templates"
+  host: "localhost"
+  port: 8080
+  threads: 4
+
+mqtt:
+  hostname: "localhost"
+  port: 3555
+  username: "3555"
+  password: "3555"
+  subscribed_topics:
+    - name: "Test1"
+      qos: 0
+    - name: "Test2"
+      qos: 0
+
+hana_database:
+  hostname: "Test"
+  port: 123
+  username: "test"
+  password: "Test"
+
+generator:
+  - method_name: "Service1"
+    mqtt_topic: "Service11"
+    mqtt_payload:
+      - OrderID: "str"
+      - OrderDate: "generateDatetime"
+      - Color: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
+      - Color2: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
+      - CustomerName: "str"
+    hana_sql_query:
+      - "Test1"
+    hana_sql_query_sep:
+      - "Test1_sep"
+      - "Test2_sep"
+
+  - method_name: "Service2"
+    mqtt_topic: "Service21"
+    mqtt_payload:
+      - OrderID: "str"
+      - OrderDate: "generateDate"
+      - CustomerName: "str"
+      - Color: "List"
+    hana_sql_query:
+      - "Test2"
+      - "Test22"
+
+  - method_name: "Service3"
+    mqtt_topic: "Service31"
+    mqtt_payload:
+      - OrderID: "str"
+      - DeviceID: "str"
+      - OrderDate: "str"
+      - StatusCode: "str"
+    hana_sql_query:
+      - "Test3"

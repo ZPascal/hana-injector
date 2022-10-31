@@ -1,0 +1,26 @@
+hana_injector:
+  secret_key: "test"
+  log_mode: "debug"
+  template: injector/templates
+  host: "localhost"
+  port: 8080
+  threads: 4
+
+mqtt:
+  hostname: "localhost"
+  port: 3555
+  username: "3555"
+  password: "3555"
+  subscribed_topics:
+    - name: "Test1"
+      qos: 0
+    - name: "Test2"
+      qos: 0
+
+hana_database:
+  hostname: "Test"
+  port: 123
+  username: "test"
+  password: "Test"
+
+generator: []

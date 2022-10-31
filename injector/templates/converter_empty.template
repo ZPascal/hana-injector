@@ -1,0 +1,18 @@
+"""
+Created on 18.02.2021
+
+@author: Pascal Zimmermann
+"""
+
+import datetime
+
+from custom_logger.custom_logger import HanaInjectorError
+from database_sql.sql import SQL
+from typing import Dict, List
+
+
+# ===============================================================================
+# Converter class to transform MQTT input to a SAP Hana database
+# ===============================================================================
+class Converter:
+    _sql = SQL()

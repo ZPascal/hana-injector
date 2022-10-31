@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info:
+  version: 0.0.1
+  title: Hana Injector
+  description: Backend service to inject an MQTT Stream to a SAP Hana database
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      description: Returns the health status
+      responses:
+        '200':
+          description: Health status of the hana injector
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Ok
+
+  /metrics:
+    get:
+      tags:
+        - Metrics
+      description: Returns the prometheus metrics
+
+      responses:
+        '200':
+          description: Prometheus metrics from the hana injector
+          content:
+            text/plain:
+              schema:
+                type: object
+                example: python_gc_objects_collected_total{generation="0"} 129.0

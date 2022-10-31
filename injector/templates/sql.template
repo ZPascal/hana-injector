@@ -1,0 +1,16 @@
+    # ==================================================================================================================
+    # Method: {{ sql_method_name }} to insert data into a hana database
+    # ==================================================================================================================
+    @classmethod
+    def {{ sql_method_name }}(cls, {{ sql_method_values }}):
+        # Connection to the Database
+        cursor = cls._conn.cursor()
+
+        sql = "{{ sql_method_payload }}"
+        cursor.execute(sql, ({{ sql_method_values }}))
+
+        # Finish the connection to the database
+        cls._conn.commit()
+
+        CustomLogger.write_to_console("information", "Execute method {{ sql_method_name }}")
+        cls._conn.close()
