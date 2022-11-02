@@ -1,27 +1,31 @@
-"""
-Created on 18.02.2021
-
-@author: Pascal Zimmermann
-"""
-
 import datetime
 
-from custom_logger.custom_logger import HanaInjectorError
+from custom_logger.logger import HanaInjectorError
 from database_sql.sql import SQL
 from typing import Dict, List
 
 
-# ===============================================================================
-# Converter class to transform MQTT input to a SAP Hana database
-# ===============================================================================
 class Converter:
+    """The class includes a converter class to transform MQTT input to a SAP Hana database"""
+
     _sql = SQL()
 
-    # ==================================================================================================================
-    # Method: service1 to transform data from mqtt to a hana database
-    # ==================================================================================================================
     @staticmethod
     def service1(mosq, obj, msg):
+        """The service1 method includes a functionality to transform data from mqtt to a hana database
+
+        Args:
+            mosq (any): Specify the mosquitto subscriber
+            obj (any): Specify the forwarded object
+            msg (any): Specify the forwarded message
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         try:
             payload = eval(str(msg.payload.decode("utf-8")))
 
@@ -50,11 +54,22 @@ class Converter:
                 f"Maybe the values are not correct. Please check the error message"
             ) from e
 
-    # ==================================================================================================================
-    # Method: service2 to transform data from mqtt to a hana database
-    # ==================================================================================================================
     @staticmethod
     def service2(mosq, obj, msg):
+        """The service2 method includes a functionality to transform data from mqtt to a hana database
+
+        Args:
+            mosq (any): Specify the mosquitto subscriber
+            obj (any): Specify the forwarded object
+            msg (any): Specify the forwarded message
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         try:
             payload = eval(str(msg.payload.decode("utf-8")))
 
@@ -73,11 +88,22 @@ class Converter:
                 f"Maybe the values are not correct. Please check the error message"
             ) from e
 
-    # ==================================================================================================================
-    # Method: service3 to transform data from mqtt to a hana database
-    # ==================================================================================================================
     @staticmethod
     def service3(mosq, obj, msg):
+        """The service3 method includes a functionality to transform data from mqtt to a hana database
+
+        Args:
+            mosq (any): Specify the mosquitto subscriber
+            obj (any): Specify the forwarded object
+            msg (any): Specify the forwarded message
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         try:
             payload = eval(str(msg.payload.decode("utf-8")))
 

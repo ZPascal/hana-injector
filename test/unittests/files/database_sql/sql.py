@@ -1,26 +1,17 @@
-"""
-Created on 18.02.2021
-
-@author: Pascal Zimmermann
-"""
-
 import os
 import pyhdb
 import socket
 
-from load_config.load_config import LoadConfig
-from custom_logger.custom_logger import HanaInjectorError, CustomLogger
+from load_config.config import LoadConfig
+from custom_logger.logger import HanaInjectorError, CustomLogger
 
 
-# ===============================================================================
-# Converter class to transform MQTT input to a SAP Hana database
-# ===============================================================================
 class SQL:
+    """The class includes all necessary methods to convert and transform MQTT input streams to an SAP Hana database"""
+
     _config = LoadConfig.load_correct_config_dict()
 
-    # ===============================================================================
     # Connection to the Database
-    # ===============================================================================
     if (
         _config["hana_database"]["username"] == ""
         or _config["hana_database"]["username"] is None
@@ -63,11 +54,17 @@ class SQL:
             "Error at the database connection, please repeat it.",
         ) from e
 
-    # ==================================================================================================================
-    # Method: service1_sep1 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service1_sep1(cls, orderid, orderdate, name, amount):
+        """The service1_sep1 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
@@ -80,11 +77,17 @@ class SQL:
         CustomLogger.write_to_console("information", "Execute method service1_sep1")
         cls._conn.close()
 
-    # ==================================================================================================================
-    # Method: service1_sep2 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service1_sep2(cls, orderid, orderdate, name, amount):
+        """The service1_sep2 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
@@ -97,11 +100,17 @@ class SQL:
         CustomLogger.write_to_console("information", "Execute method service1_sep2")
         cls._conn.close()
 
-    # ==================================================================================================================
-    # Method: service1_1 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service1_1(cls, orderid, orderdate, customername):
+        """The service1_1 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
@@ -114,11 +123,17 @@ class SQL:
         CustomLogger.write_to_console("information", "Execute method service1_1")
         cls._conn.close()
 
-    # ==================================================================================================================
-    # Method: service2_1 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service2_1(cls, orderid, orderdate, customername, color):
+        """The service2_1 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
@@ -131,11 +146,17 @@ class SQL:
         CustomLogger.write_to_console("information", "Execute method service2_1")
         cls._conn.close()
 
-    # ==================================================================================================================
-    # Method: service2_2 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service2_2(cls, orderid, orderdate, customername, color):
+        """The service2_2 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
@@ -148,11 +169,17 @@ class SQL:
         CustomLogger.write_to_console("information", "Execute method service2_2")
         cls._conn.close()
 
-    # ==================================================================================================================
-    # Method: service3_1 to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def service3_1(cls, orderid, deviceid, orderdate, statuscode):
+        """The service3_1 method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 

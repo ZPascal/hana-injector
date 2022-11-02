@@ -1,8 +1,3 @@
-"""
-Created on 18.02.2021
-
-@author: Pascal Zimmermann
-"""
 import os
 import re
 import pathlib
@@ -10,14 +5,13 @@ import subprocess
 from typing import Dict, List, Tuple
 from jinja2 import FileSystemLoader, Environment
 
-from load_config.load_config import LoadConfig
-from custom_logger.custom_logger import HanaInjectorError
+from load_config.config import LoadConfig
+from custom_logger.logger import HanaInjectorError
 
 
-# ===============================================================================
-# Class to generate sql, mqtt and converter code
-# ===============================================================================
 class Generator:
+    """The class includes all necessary methods to generate SQL, MQTT and converter code"""
+
     _SEC_LIST_DICT: str = "sep:ListDict"
     _CHECK_ERROR: str = "Please, check the error"
 
@@ -45,6 +39,12 @@ class Generator:
 
     @classmethod
     def _generate_converter(cls):
+        """The method includes a functionality to start the code generator
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         if cls._generator_list is not None and len(cls._generator_list) == 0:
             raise HanaInjectorError(
                 "Please, specify the generator rules"
@@ -59,6 +59,12 @@ class Generator:
 
     @classmethod
     def _generate_mqtt_code(cls):
+        """The method includes a functionality to generate the MQTT code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         try:
             template = cls._env.get_template("mqtt.template")
         except Exception as e:
@@ -88,6 +94,12 @@ class Generator:
 
     @classmethod
     def _reset_converter_code(cls):
+        """The method includes a functionality to reset the converter code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         try:
             fi = open(
                 f"{cls._src_path}{os.sep}templates{os.sep}converter_empty.template", "r"
@@ -106,6 +118,12 @@ class Generator:
 
     @classmethod
     def _generate_converter_code(cls):
+        """The method includes a functionality to generate the converter code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         try:
             template = cls._env.get_template("converter.template")
         except Exception as e:
@@ -140,7 +158,21 @@ class Generator:
                 raise HanaInjectorError(cls._CHECK_ERROR) from e
 
     @classmethod
-    def _get_mqtt_payload_values(cls, method_name: str, mqtt_payload: List, generator_index: int):
+    def _get_mqtt_payload_values(cls, method_name: str, mqtt_payload: List, generator_index: int) -> Tuple:
+        """The method includes a functionality to get the MQTT payload values
+
+        Args:
+            method_name (str): Specify the MQTT method name
+            mqtt_payload (List): Specify the MQTT payload as list
+            generator_index (int): Specify the generator index
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            mqtt_payload_values, method_list, sep_method_values (Tuple): Returns the MQTT payload values
+        """
+
         if mqtt_payload is None or len(mqtt_payload) == 0:
             raise HanaInjectorError("Please, check the mqtt values") from ValueError
 
@@ -148,6 +180,12 @@ class Generator:
 
     @classmethod
     def _format_converter_code(cls):
+        """The method includes a functionality to format the converter code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         cmd: List = ["black", f"{cls._src_path}{os.sep}converter{os.sep}converter.py"]
         result = subprocess.run(cmd, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 
@@ -158,6 +196,12 @@ class Generator:
 
     @classmethod
     def _reset_sql_code(cls):
+        """The method includes a functionality to reset the SQL code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         try:
             fi = open(
                 f"{cls._src_path}{os.sep}templates{os.sep}sql_empty.template", "r"
@@ -176,6 +220,12 @@ class Generator:
 
     @classmethod
     def _generate_sql_code(cls):
+        """The method includes a functionality to generate the SQL code
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        """
+
         for i in range(0, len(cls._generator_list)):
             mqtt_payload: List = cls._generator_list[i]["mqtt_payload"]
 
@@ -191,6 +241,20 @@ class Generator:
     def _write_sql_code_to_file(
         cls, sql_method_name: str, sql_method_values: str, sql_method_payload: str
     ):
+        """The method includes a functionality to write the SQL code to a file
+
+        Args:
+            sql_method_name (str): Specify the SQL method name
+            sql_method_values (str): Specify the SQL method values
+            sql_method_payload (str): Specify the SQL method payload
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         template = cls._env.get_template("sql.template")
 
         if (
@@ -216,6 +280,19 @@ class Generator:
 
     @classmethod
     def __create_sql_sep_code(cls, mqtt_payload: List, index: int):
+        """The method includes a functionality to create the seperated SQL code
+
+        Args:
+            mqtt_payload (List): Specify the MQTT payloa d list
+            index (int): Specify the index
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         sep_method_count: int = 0
         sql_method_payload_list: List = cls._generator_list[index].get("hana_sql_query_sep")
 
@@ -247,6 +324,19 @@ class Generator:
 
     @classmethod
     def __create_sql_base_code(cls, mqtt_payload: List, index: int):
+        """The method includes a functionality to create the SQL base code
+
+        Args:
+            mqtt_payload (List): Specify the MQTT payload list
+            index (int): Specify the index
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         for hana_sql_query_index in range(0, len(cls._generator_list[index]["hana_sql_query"])):
             sql_method_name = str(f"{cls._generator_list[index]['method_name']}_{hana_sql_query_index + 1}").lower()
             sql_method_payload = str(cls._generator_list[index]["hana_sql_query"][hana_sql_query_index])
@@ -272,6 +362,20 @@ class Generator:
 
     @classmethod
     def __extract_mqtt_payload_values(cls, method_name: str, mqtt_payload: List, generator_index: int) -> Tuple:
+        """The method includes a functionality to extract the MQTT payload values
+
+        Args:
+            method_name (str): Specify the method name
+            mqtt_payload (List): Specify the MQTT payloa d list
+            generator_index (int): Specify the generator index
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            mqtt_payload_values, method_list, sep_method_values (Tuple): Returns the MQTT payload values
+        """
+
         mqtt_payload_values: List = list()
         method_value: str = ""
         sep_method_values: List = list()
@@ -308,6 +412,25 @@ class Generator:
     def __generate_mqtt_payload(cls, mqtt_payload: List, index: int, key: str, sep_method_count: int,
                                 method_name: str, mqtt_payload_values: List, sep_method_values: List,
                                 method_value: str) -> Tuple:
+        """The method includes a functionality to generate the MQTT payload
+
+        Args:
+            mqtt_payload (List): Specify the MQTT payload as list
+            index (int): Specify the extracted index as integer
+            key (str): Specify the extracted key as string
+            sep_method_count (int): Specify the seperated method count
+            method_name (str): Specify the method name
+            mqtt_payload_values (List): Specify the MQTT payload values
+            sep_method_values (List): Specify the seperated method values
+            method_value (str): Specify the method value
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            mqtt_payload_values, sep_method_values, method_value, sep_method_count (Tuple): Returns the generated code as Tuple
+        """
+
         if "sep:" in mqtt_payload[index][key]:
             sep_method_count = sep_method_count + 1
 
@@ -330,6 +453,19 @@ class Generator:
     @classmethod
     def __generate_mqtt_payload_values(cls, mqtt_payload: List, index: int, key: str, hana_key_index: int,
                                        method_name: str) -> Tuple:
+        """The method includes a functionality to generate the MQTT payload values
+
+        Args:
+            mqtt_payload (List): Specify the MQTT payload as list
+            index (int): Specify the extracted index as integer
+            key (str): Specify the extracted key as string
+            hana_key_index (int): Specify the Hana key index
+            method_name (str): Specify the method name
+
+        Returns:
+            generated_code, sep_method (Tuple): Returns the generated code as Tuple
+        """
+
         sep_method: Dict = dict()
 
         if mqtt_payload[index][key] == "generateDate":
@@ -348,6 +484,22 @@ class Generator:
     @classmethod
     def __extract_sep_methods(cls, mqtt_payload: List, index: int, key: str, hana_key_index: int,
                               method_name: str) -> Dict:
+        """The method includes a functionality to extract the seperated values and return them as dictionary
+
+        Args:
+            mqtt_payload (List): Specify the MQTT payload as list
+            index (int): Specify the extracted index as integer
+            key (str): Specify the extracted key as string
+            hana_key_index (int): Specify the Hana key index
+            method_name (str): Specify the method name
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            sep_method (Dict): Returns the separated value as dict
+        """
+
         sep_method: Dict = dict()
 
         try:

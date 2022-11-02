@@ -11,7 +11,7 @@ setuptools.setup(
     version="0.0.1",
     author="Pascal Zimmermann",
     author_email="info@theiotstudio.com",
-    description="An MQTT stream to SAP HANA injector",
+    description="An MQTT stream to SAP HANA database injector",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ZPascal/hana-injector",
@@ -27,6 +27,6 @@ setuptools.setup(
     ],
     packages=["injector"],
     #TODO Update the requirements
-    install_requires=["requests"],
+    install_requires=[],
     python_requires=">=3.6",
 )

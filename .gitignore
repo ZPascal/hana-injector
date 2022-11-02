@@ -106,3 +106,8 @@ venv.bak/
 # Idea
 .idea
 /build/
+
+# Custom
+/injector/broker_mqtt/mqtt.py
+/injector/database_sql/sql.py
+/injector/converter/converter.py

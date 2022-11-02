@@ -1,8 +1,19 @@
-    # ==================================================================================================================
-    # Method: {{ converter_method_name }} to transform data from mqtt to a hana database
-    # ==================================================================================================================
     @staticmethod
     def {{ converter_method_name }}(mosq, obj, msg):
+        """The {{ converter_method_name }} method includes a functionality to transform data from mqtt to a hana database
+
+        Args:
+            mosq (any): Specify the mosquitto subscriber
+            obj (any): Specify the forwarded object
+            msg (any): Specify the forwarded message
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         try:
             payload = eval(str(msg.payload.decode("utf-8")))
 

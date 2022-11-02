@@ -1,0 +1,12 @@
+docs_dir: content
+markdown_extensions:
+- pymdownx.tasklist
+nav:
+- Home: index.md
+- Hana Injector:
+  - Generator: injector/generator.md
+  - Logger: injector/logger.md
+  - Config: injector/config.md
+repo_url: https://github.com/ZPascal/hana-injector
+site_name: Hana Injector
+theme: material

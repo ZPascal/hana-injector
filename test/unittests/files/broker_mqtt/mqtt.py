@@ -1,20 +1,13 @@
-"""
-Created on 18.02.2021
-
-@author: Pascal Zimmermann
-"""
-
 import paho.mqtt.client as mqtt
 
 from converter.converter import Converter
-from load_config.load_config import LoadConfig
-from custom_logger.custom_logger import HanaInjectorError
+from load_config.config import LoadConfig
+from custom_logger.logger import HanaInjectorError
 
 
-# ===============================================================================
-# Connection to the MQTT Broker
-# ===============================================================================
 class MQTT:
+    """The class includes all necessary methods to establish an connection to the MQTT Broker"""
+
     _client = mqtt.Client()
     _config = LoadConfig.load_correct_config_dict()
 
@@ -70,6 +63,15 @@ class MQTT:
 
     @classmethod
     def _mqtt_subscriber_generator(cls):
+        """The method includes a functionality to generate the mqtt subscribers
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         if cls._config is None:
             raise HanaInjectorError(cls.NO_CONFIG_AVAILABLE_MESSAGE) from Exception
 
@@ -107,6 +109,15 @@ class MQTT:
 
     @classmethod
     def _message_callback_generator(cls):
+        """The method includes a functionality to handle the mqtt callback
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            None
+        """
+
         if cls._config is None:
             raise HanaInjectorError(cls.NO_CONFIG_AVAILABLE_MESSAGE) from Exception
 

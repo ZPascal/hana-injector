@@ -1,8 +1,8 @@
 import os
 from unittest import TestCase
 from unittest.mock import patch, mock_open, DEFAULT, Mock
-from custom_logger.custom_logger import HanaInjectorError
-from load_config.load_config import LoadConfig
+from custom_logger.logger import HanaInjectorError
+from load_config.config import LoadConfig
 
 
 class GeneratorCase(TestCase):

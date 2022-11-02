@@ -1,0 +1,28 @@
+loaders:
+  - type: python
+    search_path: [injector]
+processors:
+  - type: filter
+  - type: smart
+  - type: crossref
+renderer:
+  type: mkdocs
+  pages:
+    - title: Home
+      name: index
+      source: docs/injector.md
+    - title: Hana Injector
+      name: injector
+      children:
+        - title: Generator
+          contents:  [ generator.generator.* ]
+        - title: Logger
+          contents: [ custom_logger.logger.* ]
+        - title: Config
+          contents: [ load_config.config.* ]
+  mkdocs_config:
+    site_name: Hana Injector
+    theme: material
+    repo_url: https://github.com/ZPascal/hana-injector
+    markdown_extensions:
+        - pymdownx.tasklist

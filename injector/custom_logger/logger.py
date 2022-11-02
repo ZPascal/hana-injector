@@ -1,14 +1,8 @@
-"""
-Created on 18.02.2020
-
-@author: Pascal Zimmermann
-"""
-
 import logging
 from jsonformatter import JsonFormatter
 from typing import Dict
 
-from load_config.load_config import LoadConfig
+from load_config.config import LoadConfig
 
 
 class HanaInjectorError(Exception):
@@ -16,9 +10,7 @@ class HanaInjectorError(Exception):
 
 
 class CustomLogger:
-    """
-    Logger class
-    """
+    """The class includes all necessary methods to specify a custom logger"""
 
     loggers: Dict = dict()
 
@@ -50,8 +42,16 @@ class CustomLogger:
 
     @classmethod
     def _get_logger(cls, name):
-        """
-        Get the logger
+        """The method includes a functionality to get the corresponding logger specified by the name
+
+        Args:
+            name (any): Specify the corresponding logger name
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+
+        Returns:
+            logger (Logger): Returns the logger
         """
 
         if cls.loggers.get(name):
@@ -79,8 +79,18 @@ class CustomLogger:
 
     @classmethod
     def write_to_console(cls, status, message):
-        """
-        Log message to log file
+        """The method includes a functionality to write the log messages to the console
+
+        Args:
+            status (any): Specify the corresponding status
+            message (any): Specify the corresponding message
+
+        Raises:
+            HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+            ValueError: Missed specifying a necessary value
+
+        Returns:
+            None
         """
 
         if cls.config is None:
@@ -105,8 +115,15 @@ class CustomLogger:
 
     @staticmethod
     def _get_correct_status(logger, status, message):
-        """
-        Find correct status code
+        """The method includes a functionality to find the correct status code
+
+        Args:
+            logger (any): Specify the corresponding logger
+            status (any): Specify the corresponding status
+            message (any): Specify the corresponding message
+
+        Returns:
+            None
         """
 
         if status == "error":
@@ -120,9 +137,13 @@ class CustomLogger:
 
     @staticmethod
     def _get_log_level_parameter(config_log_parameter: str):
-        """
-        log_level_parameter: object
-        Get correct log level parameter
+        """The method includes a functionality to get the correct log level parameter
+
+        Args:
+            config_log_parameter (any): Specify the corresponding configuration log parameter
+
+        Returns:
+            log_level_parameter (any): Return the corresponding log level parameter
         """
 
         if config_log_parameter.lower() == "debug":

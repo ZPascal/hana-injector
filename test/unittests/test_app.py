@@ -23,7 +23,7 @@ class AppCase(TestCase):
 
         self.assertIsNone(_init_application())
 
-    @patch("load_config.load_config.LoadConfig.load_correct_config_dict")
+    @patch("load_config.config.LoadConfig.load_correct_config_dict")
     def test_b_init_application_no_correct_config_available(
         self, load_correct_config_dict_mock
     ):

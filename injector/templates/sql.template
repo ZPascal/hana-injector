@@ -1,8 +1,14 @@
-    # ==================================================================================================================
-    # Method: {{ sql_method_name }} to insert data into a hana database
-    # ==================================================================================================================
     @classmethod
     def {{ sql_method_name }}(cls, {{ sql_method_values }}):
+        """The {{ sql_method_name }} method includes a functionality to insert data into a hana database
+
+        Args:
+            args (any): Specify the dynamically generated forwarded values as dummy value
+
+        Returns:
+            None
+        """
+
         # Connection to the Database
         cursor = cls._conn.cursor()
 
