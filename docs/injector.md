@@ -1,4 +1,4 @@
-# Hana Injector ![Coverage report](https://github.com/ZPascal/hana-injector/blob/main/docs/coverage.svg)
+# Hana Injector
 
 MQTT stream to SAP Hana database converter and forwarder API.
 
@@ -120,12 +120,6 @@ The corresponding app includes a Prometheus metric endpoint to get the metrics o
 #### Swagger
 
 The corresponding app includes a documentation endpoint to check the documentation pages of the API. You can call the `/api/docs` page to get the corresponding documentation pages.
-
-## TODO
-
-- Check PyPI and Docker Hub support
-- Publish a release version
-- Think about an integration test concept
 
 ## Contribution
 

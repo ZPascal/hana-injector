@@ -2,7 +2,7 @@ import os
 from typing import Dict
 from unittest import TestCase
 
-from load_config.load_config import LoadConfig
+from load_config.config import LoadConfig
 
 
 def _get_template_path() -> str:

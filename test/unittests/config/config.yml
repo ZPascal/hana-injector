@@ -1,7 +1,7 @@
 hana_injector:
   secret_key: "test"
   log_mode: "debug"
-  template: injector/templates
+  template: ../../injector/templates
   host: "localhost"
   port: 8080
   threads: 4

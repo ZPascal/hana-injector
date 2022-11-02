@@ -1,9 +1,3 @@
-"""
-Created on 05.05.2020
-
-@author: Pascal Zimmermann
-"""
-
 import os
 from typing import Dict
 
@@ -18,23 +12,29 @@ from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 from generator.generator import Generator
 from broker_mqtt.mqtt import MQTT
-from load_config.load_config import LoadConfig
-from custom_logger.custom_logger import CustomLogger, HanaInjectorError
+from load_config.config import LoadConfig
+from custom_logger.logger import CustomLogger, HanaInjectorError
 
 app = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-# ===============================================================================
 # Create a Bcrypt instance
-# ===============================================================================
 bcrypt = Bcrypt(app)
 
 
-# ===============================================================================
-# Init the application
-# ===============================================================================
 def _init_application():
+    """The method includes a functionality to initialize the application
+
+    Raises:
+        KeyError: Missed specifying a necessary configuration environment variable
+        HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
+        ValueError: Missed specifying a necessary value
+
+    Returns:
+        None
+    """
+
     if os.environ.get("HANA_INJECTOR_CONFIG_FILE_PATH") is None:
         raise KeyError("Please, set the HANA_INJECTOR_CONFIG_FILE_PATH env variable.")
 
@@ -65,30 +65,30 @@ def _init_application():
         )
 
 
-# ===============================================================================
-# Health interface
-# ===============================================================================
 @app.route("/health", methods=['GET'])
 def _get_health_check():
-    """
-    Get a health check
+    """The method includes a functionality to get the status of the health endpoint
+
+    Returns:
+        response (Response): Returns the positive status as HTTP response of the health endpoint
     """
 
     CustomLogger.write_to_console("information", "Health check, ok")
     return Response("Ok", status=200)
 
 
-# ===============================================================================
-# Swagger interface
-# ===============================================================================
 @app.route("/api/docs", methods=['GET'])
 def _get_docs():
+    """The method includes a functionality to get the documentation
+
+    Returns:
+        response (Response): Returns the documentation as HTTP response of the docs endpoint
+    """
+
     return render_template("swaggerui.html")
 
 
-# ===============================================================================
 # Create the server
-# ===============================================================================
 if __name__ == "__main__":
     _init_application()
 
