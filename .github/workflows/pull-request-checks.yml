@@ -25,8 +25,12 @@ jobs:
       - name: Install the requirements
         run: pip install -r requirements.txt
 
+      - name: Replace the configuration
+        run: |
+          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml && export PYTHONPATH=$PWD:$PWD/injector
+
       - name: Execute the unittests
-        run: python3 -m unittest discover test/unittests
+        run: export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && export HANA_INJECTOR_CONFIG_FILE_PATH_2=$PWD/test/unittests/config/config.yml && python3 -m unittest discover test/unittests
 
   lint:
     runs-on: ubuntu-latest
