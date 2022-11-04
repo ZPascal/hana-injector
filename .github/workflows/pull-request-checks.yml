@@ -27,10 +27,10 @@ jobs:
 
       - name: Replace the configuration
         run: |
-          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml && export PYTHONPATH=$PWD:$PWD/injector
+          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Execute the unittests
-        run: export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && export HANA_INJECTOR_CONFIG_FILE_PATH_2=$PWD/test/unittests/config/config.yml && pytest test/unittests
+        run: export PYTHONPATH=$PWD:$PWD/injector && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && pytest test/unittests
 
   lint:
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
           sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Generate the coverage report
-        run: export PYTHONPATH=$PWD:$PWD/injector && echo $PYTHONPATH && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && export HANA_INJECTOR_CONFIG_FILE_PATH_2=$PWD/test/unittests/config/config.yml && pytest --junitxml=pytest.xml --cov=. test/unittests | tee pytest-coverage.txt
+        run: export PYTHONPATH=$PWD:$PWD/injector && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && pytest --junitxml=pytest.xml --cov=. test/unittests | tee pytest-coverage.txt
 
       - name: Execute the coverage checks
         uses: MishaKav/pytest-coverage-comment@v1.1.16
