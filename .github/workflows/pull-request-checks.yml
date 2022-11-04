@@ -81,7 +81,7 @@ jobs:
 
       - name: Replace the configuration
         run: |
-          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml && echo $PWD && ls -la && export PYTHONPATH=$PWD:$PWD/injector
+          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml && export PYTHONPATH=$PWD:$PWD/injector && echo $PYTHONPATH
 
       - name: Generate the coverage report
         run: export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && export HANA_INJECTOR_CONFIG_FILE_PATH_2=$PWD/test/unittests/config/config.yml && pytest --junitxml=pytest.xml --cov=. test/unittests | tee pytest-coverage.txt
