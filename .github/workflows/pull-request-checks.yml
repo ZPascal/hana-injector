@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -30,7 +30,7 @@ jobs:
           sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Execute the unittests
-        run: export PYTHONPATH=$PWD:$PWD/injector && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && pytest test/unittests
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest
 
   lint:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -70,7 +70,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -84,7 +84,7 @@ jobs:
           sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Generate the coverage report
-        run: export PYTHONPATH=$PWD:$PWD/injector && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && pytest --junitxml=pytest.xml --cov=. test/unittests | tee pytest-coverage.txt
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
 
       - name: Execute the coverage checks
         uses: MishaKav/pytest-coverage-comment@v1.1.16
