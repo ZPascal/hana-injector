@@ -84,19 +84,19 @@ jobs:
           sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Generate the coverage report
-        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt && mv .coverage ../../.coverage && cd ../.. && ls -la
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt && mv .coverage pytest-coverage.txt pytest.xml ../../ && cd ../.. && ls -la
 
       - name: Execute the coverage checks
         uses: MishaKav/pytest-coverage-comment@v1.1.37
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-coverage-path: ./test/unittests/pytest-coverage.txt
-          junitxml-path: ./test/unittests/pytest.xml
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
           hide-badge: true
           create-new-commit: true
 
       - name: Generate coverage badge
-        run: coverage-badge -f -o docs/coverage.svg
+        run: ls -la && coverage-badge -f -o docs/coverage.svg
 
       - name: Generate documentation
         run: pydoc-markdown --render-toc && rm -rf docs/content && mv build/docs/* docs
