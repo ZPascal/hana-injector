@@ -84,12 +84,12 @@ jobs:
           sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Generate the coverage report
-        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt && ls -la && echo $PWD
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt && mv .coverage ../../.coverage
 
       - name: Execute the coverage checks
-        uses: MishaKav/pytest-coverage-comment@v1.1.16
+        uses: MishaKav/pytest-coverage-comment@v1.1.37
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
           hide-badge: true
