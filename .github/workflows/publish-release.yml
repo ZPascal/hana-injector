@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build-and-publish:
+  python-build-and-publish:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,29 +17,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
           cache: 'pip'
 
       - name: Install the requirements
-        run: pip install -r requirements.txt
-
-      - name: Install pypa/build
-        run: >-
-          python -m
-          pip install
-          build
-          --user
+        run: pip install -r requirements.txt && pip install build mkdocs mkdocs-material
 
       - name: Build a binary wheel and a source tarball
-        run: >-
-          python -m
-          build
-          --sdist
-          --wheel
-          --outdir dist/
+        run: python -m build --sdist --wheel --outdir dist/
 
       - name: Setup the GitHub user
         run: |
@@ -54,3 +42,16 @@ jobs:
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+
+  docker-build-and-publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: docker build . -t z9pascal/hana-injector:$(cat ./Dockerfile | grep -Po 'version="\K.*?(?=")')-latest
+
+      - name: Relase the Docker image
+        run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u z9pascal --password-stdin && docker push z9pascal/hana-injector:$(cat ./Dockerfile | grep -Po 'version="\K.*?(?=")')-latest

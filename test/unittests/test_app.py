@@ -110,3 +110,24 @@ class AppCase(TestCase):
             )
         else:
             os.environ["HANA_INJECTOR_CONFIG_FILE_PATH"] = "config/config.yml"
+
+    @patch("flask.cli.FlaskGroup")
+    @patch("flask_bcrypt.Bcrypt")
+    @patch.dict(os.environ, {"HANA_INJECTOR_GENERATOR_MODE": "False"})
+    @patch.dict(
+        os.environ,
+        {
+            "HANA_INJECTOR_CONFIG_FILE_PATH": f"{os.getcwd()}/config/config.yml"
+        },
+    )
+    def test_g_main(self, bcrypt_mock, flask_group_mock):
+        from app import main
+
+        main(True)
+
+        if os.environ.get("HANA_INJECTOR_CONFIG_FILE_PATH_2") is not None:
+            os.environ["HANA_INJECTOR_CONFIG_FILE_PATH"] = os.environ.get(
+                "HANA_INJECTOR_CONFIG_FILE_PATH_2"
+            )
+        else:
+            os.environ["HANA_INJECTOR_CONFIG_FILE_PATH"] = "config/config.yml"
