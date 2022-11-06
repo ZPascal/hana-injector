@@ -88,8 +88,13 @@ def _get_docs():
     return render_template("swaggerui.html")
 
 
-# Create the server
-if __name__ == "__main__":
+def main(test: bool = False):
+    """The method includes a functionality to start the application
+
+    Returns:
+        None
+    """
+
     _init_application()
 
     manager = FlaskGroup(app)
@@ -105,5 +110,12 @@ if __name__ == "__main__":
     )
 
     config: Dict = LoadConfig.load_correct_config_dict()
-    serve(dispatcher, host=config["hana_injector"]["host"], port=config["hana_injector"]["8080"],
-          threads=config["hana_injector"]["threads"])
+
+    if test is False:
+        serve(dispatcher, host=config["hana_injector"]["host"], port=config["hana_injector"]["port"],
+              threads=config["hana_injector"]["threads"])
+
+
+# Create the server
+if __name__ == "__main__":
+    main()

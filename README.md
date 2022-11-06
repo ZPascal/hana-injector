@@ -123,8 +123,6 @@ The corresponding app includes a documentation endpoint to check the documentati
 
 ## TODO
 
-- Check PyPI and Docker Hub support
-- Publish a release version
 - Think about an integration test concept
 
 ## Contribution
