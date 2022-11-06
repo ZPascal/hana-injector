@@ -1,10 +1,16 @@
 import setuptools
+import os
+from pathlib import Path
+from typing import List
 
 with open("README.md", "r", encoding="utf-8") as fh:
     coverage_string: str = "![Coverage report](https://github.com/ZPascal/hana-injector/blob/main/docs/coverage.svg)"
     long_description: str = fh.read()
 
 long_description = long_description.replace(coverage_string, "")
+
+with open(os.path.join(Path(__file__).parent, 'requirements.txt'), encoding='utf-8') as f:
+    all_reqs: List[str] = f.read().split('\n')
 
 setuptools.setup(
     name="hana-injector",
@@ -26,7 +32,10 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=["injector"],
-    #TODO Update the requirements
-    install_requires=[],
+    entry_points="""
+        [console_scripts]
+        hana-injector=injector.app:main
+    """,
+    install_requires=all_reqs,
     python_requires=">=3.6",
 )
