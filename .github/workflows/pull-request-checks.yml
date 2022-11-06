@@ -16,17 +16,21 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
           cache: 'pip'
 
       - name: Install the requirements
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt && pip install pytest
+
+      - name: Replace the configuration
+        run: |
+          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
 
       - name: Execute the unittests
-        run: python3 -m unittest discover tests/unittests
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest
 
   lint:
     runs-on: ubuntu-latest
@@ -38,7 +42,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -48,7 +52,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Execute the linting checks
-        uses: reviewdog/action-flake8@v3.2.0
+        uses: reviewdog/action-flake8@v3.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           flake8_args: --config=.flake8
@@ -66,7 +70,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -75,26 +79,30 @@ jobs:
       - name: Install the requirements
         run: pip install -r requirements.txt && pip install pytest pytest-cov coverage-badge pydoc-markdown==4.6.3 mkdocs mkdocs-material
 
+      - name: Replace the configuration
+        run: |
+          sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml
+
       - name: Generate the coverage report
-        run: sed -i "s|template: injector/templates|template: $PWD/injector/templates|g" ./test/unittests/config/config.yml && export PYTHONPATH=$PWD:$PWD/injector && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/test/unittests/config/config.yml && export HANA_INJECTOR_CONFIG_FILE_PATH_2=$PWD/test/unittests/config/config.yml && pytest --junitxml=pytest.xml --cov=. tests/unittests | tee pytest-coverage.txt
+        run: export PYTHONPATH=$PYTHONPATH:$PWD/injector && cd test/unittests && export HANA_INJECTOR_CONFIG_FILE_PATH=$PWD/config/config.yml && pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
 
       - name: Execute the coverage checks
-        uses: MishaKav/pytest-coverage-comment@v1.1.16
+        uses: MishaKav/pytest-coverage-comment@v1.1.37
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-coverage-path: ./pytest-coverage.txt
-          junitxml-path: ./pytest.xml
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pytest-coverage-path: ./test/unittests/pytest-coverage.txt
+          junitxml-path: ./test/unittests/pytest.xml
           hide-badge: true
           create-new-commit: true
 
       - name: Generate coverage badge
-        run: coverage-badge -f -o docs/coverage.svg
+        run: cd test/unittests && coverage-badge -f -o ../../docs/coverage.svg
 
       - name: Generate documentation
         run: pydoc-markdown --render-toc && rm -rf docs/content && mv build/docs/* docs
 
       - name: Check changed files
-        uses: tj-actions/verify-changed-files@v8.8
+        uses: tj-actions/verify-changed-files@v12.0
         id: verify-changed-files
         with:
           files: |

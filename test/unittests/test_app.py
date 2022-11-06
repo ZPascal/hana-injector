@@ -95,7 +95,7 @@ class AppCase(TestCase):
     @patch.dict(
         os.environ,
         {
-            "HANA_INJECTOR_CONFIG_FILE_PATH": f"{os.getcwd()}/test/unittests/config/config_no_secret_key.yml"
+            "HANA_INJECTOR_CONFIG_FILE_PATH": f"{os.getcwd()}/config/config_no_secret_key.yml"
         },
     )
     def test_f_init_application_no_app_config_error(self):
