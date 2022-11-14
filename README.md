@@ -19,8 +19,23 @@ After the transformation process, the core functionality of the tool is the inje
 ### Process flow
 The transformation process identify the elements and puts these variables in the SQL statement. For this process, the statements were defined before the application starts.  As soon as the transforming is done, the string is transformed to the HANA DB SQL format and can then be directly inserted to the HANA database.
 
-## Installation and configuration
-### Installation
+## Installation, startup and configuration
+### Installation and startup
+#### Docker
+```
+docker pull z9pascal/hana-injector:latest
+docker run -e HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml -v /storage:/storage -v ./config/config.yml:/storage/conf/config.yml -p 8080:8080 z9pascal/hana-injector:latest
+```
+
+#### PyPi
+ ```
+pip install hana-injector
+export HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml
+hana-injector
+```
+
+#### Manual
+
 1. Please clone the injector code inside your local environment and install all required dependencies via `pip3 install -r requirements.txt` for the application.
 2. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
 
@@ -30,7 +45,6 @@ Before starting the application, you must ensure that both the MQTT server and t
 In case these preconditions are not set, the application will throw multiple errors and will eventually crash.
 
 You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable `HANA_INJECTOR_CONFIG_FILE_PATH` and to store the path of the configuration file inside the variable e.g. `HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml`.
-For the startup of the application it's required to call the `app.py` script e.g. `python3 app.py`.
 
 #### Configuration Yaml
 
