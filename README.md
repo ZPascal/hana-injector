@@ -23,8 +23,8 @@ The transformation process identify the elements and puts these variables in the
 ### Installation and startup
 #### Docker
 ```
-docker pull z9pascal/hana-injector:latest
-docker run -e HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml -v /storage:/storage -v ./config/config.yml:/storage/conf/config.yml -p 8080:8080 z9pascal/hana-injector:latest
+docker pull z9pascal/hana-injector:0.0.1-latest
+docker run -e HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml -v /storage:/storage -v ./config/config.yml:/storage/conf/config.yml -p 8080:8080 z9pascal/hana-injector:0.0.1-latest
 ```
 
 #### PyPi
