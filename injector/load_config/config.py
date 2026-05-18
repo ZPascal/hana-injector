@@ -1,6 +1,6 @@
 import os
 from typing import Dict
-from ruamel.yaml import YAML
+import yaml
 from pathlib import Path
 
 
@@ -24,7 +24,7 @@ class LoadConfig:
             )
 
         path = Path(f"{os.environ.get('HANA_INJECTOR_CONFIG_FILE_PATH')}")
-        yaml = YAML(typ="safe")
-        data: Dict = yaml.load(path)
+        with path.open("r", encoding="utf-8") as config_file:
+            data: Dict = yaml.safe_load(config_file)
 
         return data

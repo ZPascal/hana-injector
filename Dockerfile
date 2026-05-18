@@ -1,11 +1,11 @@
-FROM python:3.11-alpine3.16
+FROM python:3.14-alpine3.23
 MAINTAINER Pascal Zimmermann <pascal.zimmermann@theiotstudio.com>
 
 LABEL application="hana-injector" \
       description="hana-injector - Backend service to inject an MQTT Stream to a SAP Hana database" \
-      version="0.0.1" \
+      version="0.0.2" \
       lastUpdatedBy="Pascal Zimmermann" \
-      lastUpdatedOn="2022-11-06"
+      lastUpdatedOn="2026-05-18"
 
 ENV HANA_INJECTOR_CONFIG_FILE_PATH="/image/config/config.yml"
 

@@ -96,7 +96,7 @@ class LoadConfigCase(TestCase):
 
     def test_load_correct_config_dict_env_variable_error(self):
         # Variable should be removed to test the KeyError
-        del os.environ["HANA_INJECTOR_CONFIG_FILE_PATH"]
+        os.environ.pop("HANA_INJECTOR_CONFIG_FILE_PATH", None)
         with self.assertRaises(KeyError) as raises:
             LoadConfig.load_correct_config_dict()
         self.assertEqual(
