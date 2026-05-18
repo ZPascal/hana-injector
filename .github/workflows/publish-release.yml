@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout the repository and the branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Build the Docker image
         run: docker build . -t z9pascal/hana-injector:$(cat ./Dockerfile | grep -Po 'version="\K.*?(?=")')-latest
