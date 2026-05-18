@@ -1,7 +1,7 @@
 appdirs==1.4.4
 bcrypt==4.0.1
 black==22.10.0
-cffi==1.15.1
+cffi==2.0.0
 click==8.1.8
 distro==1.8.0
 Flask==2.2.2
