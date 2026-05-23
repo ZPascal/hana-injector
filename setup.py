@@ -14,7 +14,7 @@ with open(os.path.join(Path(__file__).parent, 'requirements.txt'), encoding='utf
 
 setuptools.setup(
     name="hana-injector",
-    version="0.0.1",
+    version="0.0.2",
     author="Pascal Zimmermann",
     author_email="info@theiotstudio.com",
     description="An MQTT stream to SAP HANA database injector",
@@ -37,5 +37,5 @@ setuptools.setup(
         hana-injector=injector.app:main
     """,
     install_requires=all_reqs,
-    python_requires=">=3.6",
+    python_requires=">=3.10",
 )

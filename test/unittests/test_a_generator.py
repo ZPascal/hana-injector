@@ -134,11 +134,9 @@ class GeneratorCase(TestCase):
         with self.assertRaises(HanaInjectorError):
             self.generator._get_mqtt_payload_values("test", list(), 1)
 
-    @patch("subprocess.run")
-    def test_format_converter_code_subprocess_error(self, subprocess_run_mock):
-        mock: Mock = Mock()
-        mock.returncode = 1
-        subprocess_run_mock.return_value = mock
+    @patch("black.format_str")
+    def test_format_converter_code_error(self, format_str_mock):
+        format_str_mock.side_effect = Exception("black formatting failed")
 
         with self.assertRaises(HanaInjectorError):
             self.generator._format_converter_code()

@@ -1,7 +1,6 @@
 import os
 import re
 import pathlib
-import subprocess
 from typing import Dict, List, Tuple
 from jinja2 import FileSystemLoader, Environment
 
@@ -185,14 +184,18 @@ class Generator:
         Raises:
             HanaInjectorError: Wrapper exception to reformat the forwarded potential exception and include inside the trowed stacktrace
         """
-
-        cmd: List = ["black", f"{cls._src_path}{os.sep}converter{os.sep}converter.py"]
-        result = subprocess.run(cmd, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-
-        if result.returncode != 0:
+        try:
+            import black as _black
+            converter_path = f"{cls._src_path}{os.sep}converter{os.sep}converter.py"
+            with open(converter_path, "r", encoding="utf-8") as f:
+                source = f.read()
+            formatted = _black.format_str(source, mode=_black.Mode())
+            with open(converter_path, "w", encoding="utf-8") as f:
+                f.write(formatted)
+        except Exception as e:
             raise HanaInjectorError(
-                "Please, check if you installed black"
-            ) from Exception
+                f"Failed to format converter with black: {e}"
+            ) from e
 
     @classmethod
     def _reset_sql_code(cls):

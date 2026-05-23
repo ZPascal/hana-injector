@@ -24,7 +24,7 @@ jobs:
           cache: 'pip'
 
       - name: Install the requirements
-        run: pip install -r requirements.txt && pip install build mkdocs mkdocs-material
+        run:  sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y python3-dev && pip install -r requirements.txt && pip install build mkdocs mkdocs-material
 
       - name: Build a binary wheel and a source tarball
         run: python -m build --sdist --wheel --outdir dist/

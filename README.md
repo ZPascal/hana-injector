@@ -36,7 +36,7 @@ hana-injector
 
 #### Manual
 
-1. Please clone the injector code inside your local environment and install all required dependencies via `pip3 install -r requirements.txt` for the application.
+1. Please clone the injector code inside your local environment and install the `python3-dev` dependencies and use `pip3 install -r requirements.txt` for other necessary libraries.
 2. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
 
 ### Configuration
