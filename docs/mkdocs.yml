@@ -1,12 +1,46 @@
-docs_dir: content
-markdown_extensions:
-- pymdownx.tasklist
-nav:
-- Home: index.md
-- Hana Injector:
-  - Generator: injector/generator.md
-  - Logger: injector/logger.md
-  - Config: injector/config.md
-repo_url: https://github.com/ZPascal/hana-injector
 site_name: Hana Injector
-theme: material
+
+repo_url: https://github.com/ZPascal/hana-injector
+repo_name: ZPascal/hana-injector
+
+docs_dir: content
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [ .. ]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_category_heading: true
+            members_order: source
+            inherited_members: false
+            docstring_options:
+              warn_unknown_params: false
+      enable_inventory: true
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
+nav:
+  - Home: index.md
+  - Hana Injector:
+    - Generator: injector/generator.md
+    - Logger: injector/logger.md
+    - Config: injector/config.md
+markdown_extensions:
+  - pymdownx.tasklist

@@ -2,7 +2,6 @@ import datetime
 
 from custom_logger.logger import HanaInjectorError
 from database_sql.sql import SQL
-from typing import Dict, List
 
 
 class Converter:

@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import MagicMock, Mock, patch
 
 
 class SQLTestCase(TestCase):
@@ -17,6 +17,7 @@ class SQLTestCase(TestCase):
         pyhdb_connect_mock.return_value = mock
 
         from database_sql.sql import SQL
+
         self.sql = SQL()
 
     @patch.dict(os.environ, {"HANA_INJECTOR_GENERATOR_MODE": "False"})
