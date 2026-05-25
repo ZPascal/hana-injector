@@ -13,7 +13,7 @@ Jinja2==3.1.2
 jsonformatter==0.3.2
 MarkupSafe==2.1.1
 mypy-extensions==0.4.3
-paho-mqtt==1.6.1
+paho-mqtt==2.1.0
 pathspec==1.1.1
 platformdirs==2.5.2
 prometheus-client==0.15.0
