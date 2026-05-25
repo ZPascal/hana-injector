@@ -27,7 +27,6 @@ The project uses [uv dependency groups](https://docs.astral.sh/uv/concepts/depen
 |-------------|----------------------------------------------------------|-----------------------------|
 | `generator` | `black` – needed at runtime when the code generator runs | `uv sync --group generator` |
 | `dev`       | All of `generator` + `pytest`, `pytest-cov`, `ruff`, `genbadge[coverage]` | `uv sync --group dev`       |
-| `docs`      | `mkdocs`, `mkdocs-material`, `mkdocstrings[python]` for building documentation | `uv sync --extra docs` |
 
 ## Installation, startup and configuration
 ### Installation and startup

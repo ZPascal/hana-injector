@@ -19,10 +19,20 @@ After the transformation process, the core functionality of the tool is the inje
 ### Process flow
 The transformation process identify the elements and puts these variables in the SQL statement. For this process, the statements were defined before the application starts.  As soon as the transforming is done, the string is transformed to the HANA DB SQL format and can then be directly inserted to the HANA database.
 
-## Installation and configuration
+## Installation, startup and configuration
 ### Installation
-1. Please clone the injector code inside your local environment and install all required dependencies via `pip3 install -r requirements.txt` for the application.
-2. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
+#### PyPi
+```
+pip install hana-injector
+export HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml
+hana-injector
+```
+
+#### Manual
+
+1. Please clone the injector code inside your local environment.
+2. Install all dependencies with `uv sync` (or `pip install -e .` for classic pip workflows).
+3. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
 
 ### Configuration
 Before starting the application, you must ensure that both the MQTT server and the corresponding HANA DB server are running.
@@ -30,7 +40,23 @@ Before starting the application, you must ensure that both the MQTT server and t
 In case these preconditions are not set, the application will throw multiple errors and will eventually crash.
 
 You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable `HANA_INJECTOR_CONFIG_FILE_PATH` and to store the path of the configuration file inside the variable e.g. `HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml`.
-For the startup of the application it's required to call the `app.py` script e.g. `python3 app.py`.
+
+#### Environment Variables
+
+| Variable                         | Required | Default   | Description                                                                            |
+|----------------------------------|----------|-----------|----------------------------------------------------------------------------------------|
+| `HANA_INJECTOR_CONFIG_FILE_PATH` | ✅ Yes    | —         | Absolute or relative path to the YAML configuration file. Example: `config/config.yml` |
+| `HANA_INJECTOR_GENERATOR_MODE`   | ❌ No     | *(unset)* | Controls whether the code generator runs on startup. See details below.                |
+
+##### `HANA_INJECTOR_GENERATOR_MODE` in detail
+
+The generator creates the converter, MQTT callback and SQL query source files from the `generator` section of the configuration YAML. Its behaviour depends on how the variable is set:
+
+| Value                        | Behaviour                                                                                                                                                 |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *(not set)*                  | Generator **runs** on startup and writes the generated files. After the run the application internally sets the variable to `"False"`.                    |
+| `"True"`                     | Generator **runs** on startup (same as *not set*).                                                                                                        |
+| `"False"` or any other value | Generator is **skipped**. Use this when generated files already exist, e.g. in production containers where code was pre-generated during the image build. |
 
 #### Configuration Yaml
 
@@ -135,4 +161,4 @@ If you would like to support my work, I ask you to take an unusual action inside
 
 ## License
 
-This product is available under the Apache 2.0 [license](LICENSE).
+This product is available under the Apache 2.0.
