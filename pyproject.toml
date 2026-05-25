@@ -2,7 +2,7 @@
 name = "hana-injector"
 version = "1.0.0"
 description = "An MQTT stream to SAP HANA database injector"
-readme = "README.md"
+readme = "docs/content/index.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 authors = [
@@ -71,6 +71,25 @@ dev = [
     "pytest",
     "pytest-cov",
     "ruff>=0.11.0",
+]
+
+# ---------------------------------------------------------------------------
+# coverage
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+branch = true
+source = ["."]
+
+[tool.coverage.report]
+omit = ["*/test/unittests/*.py"]
+fail_under = 60
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
 ]
 
 # ---------------------------------------------------------------------------
