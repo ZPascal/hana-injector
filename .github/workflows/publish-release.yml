@@ -42,7 +42,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
       - name: Update the GitHub pages documentation
-        run: uv run mkdocs build --config-file docs/mkdocs.yml && cd docs && mkdocs gh-deploy --force && cd ..
+        run: uv run mkdocs build --config-file docs/mkdocs.yml && uv run mkdocs gh-deploy --config-file docs/mkdocs.yml --force
 
       - name: Publish distribution package to PyPI
         if: startsWith(github.ref, 'refs/tags')
