@@ -9,7 +9,7 @@ Flask-Bcrypt==1.0.1
 flask-prometheus-metrics==1.0.0
 Flask-WTF==1.0.1
 itsdangerous==2.2.0
-Jinja2==3.1.2
+Jinja2==3.1.6
 jsonformatter==0.3.2
 MarkupSafe==2.1.1
 mypy-extensions==0.4.3
