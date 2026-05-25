@@ -2,7 +2,6 @@ import datetime
 
 from custom_logger.logger import HanaInjectorError
 from database_sql.sql import SQL
-from typing import Dict, List
 
 
 class Converter:
@@ -33,8 +32,8 @@ class Converter:
             orderdate: datetime = datetime.datetime.strptime(
                 payload["OrderDate"], "%Y-%m-%dT%H:%M:%SZ"
             ).date()
-            color: List = payload["Color"]
-            color2: List = payload["Color2"]
+            color: list = payload["Color"]
+            color2: list = payload["Color2"]
             customername: str = payload["CustomerName"]
 
             SQL.service1_1(orderid, orderdate, color, color2, customername)
@@ -51,7 +50,7 @@ class Converter:
                 )
         except Exception as e:
             raise HanaInjectorError(
-                f"Maybe the values are not correct. Please check the error message"
+                "Maybe the values are not correct. Please check the error message"
             ) from e
 
     @staticmethod
@@ -78,14 +77,14 @@ class Converter:
                 payload["OrderDate"], "%Y-%m-%d"
             ).date()
             customername: str = payload["CustomerName"]
-            color: List = payload["Color"]
+            color: list = payload["Color"]
 
             SQL.service2_1(orderid, orderdate, customername, color)
             SQL.service2_2(orderid, orderdate, customername, color)
 
         except Exception as e:
             raise HanaInjectorError(
-                f"Maybe the values are not correct. Please check the error message"
+                "Maybe the values are not correct. Please check the error message"
             ) from e
 
     @staticmethod
@@ -116,5 +115,5 @@ class Converter:
 
         except Exception as e:
             raise HanaInjectorError(
-                f"Maybe the values are not correct. Please check the error message"
+                "Maybe the values are not correct. Please check the error message"
             ) from e

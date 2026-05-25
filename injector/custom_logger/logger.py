@@ -1,7 +1,6 @@
 import logging
-from jsonformatter import JsonFormatter
-from typing import Dict
 
+from jsonformatter import JsonFormatter
 from load_config.config import LoadConfig
 
 
@@ -12,7 +11,7 @@ class HanaInjectorError(Exception):
 class CustomLogger:
     """The class includes all necessary methods to specify a custom logger"""
 
-    loggers: Dict = dict()
+    loggers: dict = {}
 
     log_format: str = """{
         "Name":            "name",
@@ -34,7 +33,7 @@ class CustomLogger:
     }"""
 
     try:
-        config: Dict = LoadConfig.load_correct_config_dict()
+        config: dict = LoadConfig.load_correct_config_dict()
     except Exception as e:
         raise HanaInjectorError(
             "Please, check the error and define the env variable HANA_INJECTOR_CONFIG_FILE_PATH."
@@ -94,24 +93,16 @@ class CustomLogger:
         """
 
         if cls.config is None:
-            raise HanaInjectorError(
-                "Can't parse the config yaml. Please, define a valid config yaml"
-            ) from Exception
+            raise HanaInjectorError("Can't parse the config yaml. Please, define a valid config yaml") from Exception
 
         try:
             if cls.config["hana_injector"]["log_mode"] != "debug":
                 if status == "error" or status == "warning":
-                    CustomLogger._get_correct_status(
-                        CustomLogger._get_logger("hana_injector"), status, message
-                    )
+                    CustomLogger._get_correct_status(CustomLogger._get_logger("hana_injector"), status, message)
             else:
-                CustomLogger._get_correct_status(
-                    CustomLogger._get_logger("hana_injector"), status, message
-                )
+                CustomLogger._get_correct_status(CustomLogger._get_logger("hana_injector"), status, message)
         except (KeyError, ValueError):
-            raise ValueError(
-                "Value not available. Please, set the correct parameter: hana_injector.log_mode"
-            )
+            raise ValueError("Value not available. Please, set the correct parameter: hana_injector.log_mode")
 
     @staticmethod
     def _get_correct_status(logger, status, message):

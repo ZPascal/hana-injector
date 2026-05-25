@@ -1,15 +1,15 @@
 import datetime
-
 from unittest import TestCase
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
 from custom_logger.logger import HanaInjectorError
 
 
 class ConverterTestCase(TestCase):
-
     def test_service1_error(self):
         with self.assertRaises(HanaInjectorError):
             from converter.converter import Converter
+
             Converter.service1("test", "test", "test")
 
     @patch("database_sql.sql.SQL.service1_sep2")
@@ -19,17 +19,13 @@ class ConverterTestCase(TestCase):
         msg_mock: Mock = Mock()
         msg_mock.payload.decode = Mock(
             return_value=str(
-                dict(
-                    {
-                        "OrderID": "test",
-                        "OrderDate": datetime.datetime.now().strftime(
-                            "%Y-%m-%dT%H:%M:%SZ"
-                        ),
-                        "CustomerName": "test",
-                        "Color": [{"Name": "test", "Amount": "test"}],
-                        "Color2": [{"Name": "test", "Amount": "test"}],
-                    }
-                )
+                {
+                    "OrderID": "test",
+                    "OrderDate": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "CustomerName": "test",
+                    "Color": [{"Name": "test", "Amount": "test"}],
+                    "Color2": [{"Name": "test", "Amount": "test"}],
+                }
             )
         )
 
@@ -44,6 +40,7 @@ class ConverterTestCase(TestCase):
     def test_service2_error(self):
         with self.assertRaises(HanaInjectorError):
             from converter.converter import Converter
+
             Converter.service2("test", "test", "test")
 
     @patch("database_sql.sql.SQL.service2_2")
@@ -52,14 +49,12 @@ class ConverterTestCase(TestCase):
         msg_mock: Mock = Mock()
         msg_mock.payload.decode = Mock(
             return_value=str(
-                dict(
-                    {
-                        "OrderID": "test",
-                        "OrderDate": datetime.datetime.now().strftime("%Y-%m-%d"),
-                        "CustomerName": "test",
-                        "Color": ["test", "test"],
-                    }
-                )
+                {
+                    "OrderID": "test",
+                    "OrderDate": datetime.datetime.now().strftime("%Y-%m-%d"),
+                    "CustomerName": "test",
+                    "Color": ["test", "test"],
+                }
             )
         )
 
@@ -73,6 +68,7 @@ class ConverterTestCase(TestCase):
     def test_service3_error(self):
         with self.assertRaises(HanaInjectorError):
             from converter.converter import Converter
+
             Converter.service3("test", "test", "test")
 
     @patch("database_sql.sql.SQL.service3_1")
@@ -80,16 +76,12 @@ class ConverterTestCase(TestCase):
         msg_mock: Mock = Mock()
         msg_mock.payload.decode = Mock(
             return_value=str(
-                dict(
-                    {
-                        "OrderID": "test",
-                        "DeviceID": "test",
-                        "OrderDate": datetime.datetime.now().strftime(
-                            "%Y-%m-%dT%H:%M:%SZ"
-                        ),
-                        "StatusCode": "test",
-                    }
-                )
+                {
+                    "OrderID": "test",
+                    "DeviceID": "test",
+                    "OrderDate": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "StatusCode": "test",
+                }
             )
         )
 

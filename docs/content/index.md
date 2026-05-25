@@ -66,8 +66,8 @@ generator:
     mqtt_payload:
       - OrderID: "str"
       - OrderDate: "generateDatetime"
-      - Color: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
-      - Color2: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
+      - Color: "sep:listDict(Name, Amount)|OrderID, OrderDate"
+      - Color2: "sep:listDict(Name, Amount)|OrderID, OrderDate"
       - CustomerName: "str"
     hana_sql_query:
       - "Test1"
@@ -81,7 +81,7 @@ generator:
       - OrderID: "str"
       - OrderDate: "generateDate"
       - CustomerName: "str"
-      - Color: "List"
+      - Color: "list"
     hana_sql_query:
       - "Test2"
       - "Test22"
@@ -101,9 +101,9 @@ generator:
 - **int** | Mapping value for a classical integer like `1`
 - **double**  | Mapping value for a classical double like `1.1`
 - **str**  | Mapping value for a classical string like `test`
-- **List**  | Mapping value for a classical list of values like `["test", "test1"]`
-- **ListDict** | Mapping value for a list of dictionaries like `[{"test": "test1"}, {"test1": "test2"}]`
-- **sep:ListDict** | Mapping value the functionality to separate values from MQTT stream and accumulate existing values from configuration/ stream and forward both together to the HANA database via a separate methode and query `sep:ListDict(Name, Amount)|OrderID, OrderDate`. For this datatype it's also necessary to specify the `hana_sql_query_sep` configuration option and forward the queries in the right order to the generator functionality.
+- **list**  | Mapping value for a classical list of values like `["test", "test1"]`
+- **listDict** | Mapping value for a list of dictionaries like `[{"test": "test1"}, {"test1": "test2"}]`
+- **sep:listDict** | Mapping value the functionality to separate values from MQTT stream and accumulate existing values from configuration/ stream and forward both together to the HANA database via a separate methode and query `sep:listDict(Name, Amount)|OrderID, OrderDate`. For this datatype it's also necessary to specify the `hana_sql_query_sep` configuration option and forward the queries in the right order to the generator functionality.
 - **Dict** | Mapping value for a dictionary like `{"test": "test1"}`
 - **generateDate** | Mapping value for the functionality to generate a date inside the following format `%Y-%m-%d`
 - **generateDatetime** | Mapping value for the functionality to generate a date time inside the following format `%Y-%m-%dT%H:%M:%SZ`
@@ -135,4 +135,4 @@ If you would like to support my work, I ask you to take an unusual action inside
 
 ## License
 
-This product is available under the Apache 2.0 [license](LICENSE).
+This product is available under the Apache 2.0.

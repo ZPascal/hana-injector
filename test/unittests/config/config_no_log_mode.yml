@@ -27,8 +27,8 @@ generator:
     mqtt_payload:
       - OrderID: "str"
       - OrderDate: "generateDatetime"
-      - Color: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
-      - Color2: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
+      - Color: "sep:listDict(Name, Amount)|OrderID, OrderDate"
+      - Color2: "sep:listDict(Name, Amount)|OrderID, OrderDate"
       - CustomerName: "str"
     hana_sql_query:
       - "Test1"
@@ -42,7 +42,7 @@ generator:
       - OrderID: "str"
       - OrderDate: "generateDate"
       - CustomerName: "str"
-      - Color: "List"
+      - Color: "list"
     hana_sql_query:
       - "Test2"
       - "Test22"

@@ -1,0 +1,111 @@
+[project]
+name = "hana-injector"
+version = "1.0.0"
+description = "An MQTT stream to SAP HANA database injector"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Pascal Zimmermann", email = "info@theiotstudio.com" }
+]
+keywords = ["hana", "mqtt", "injector", "sap"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "Flask>=2.2.2",
+    "Flask-Bcrypt>=1.0.1",
+    "flask-prometheus-metrics>=1.0.0",
+    "Flask-WTF>=1.0.1",
+    "itsdangerous>=2.2.0",
+    "Jinja2>=3.1.2",
+    "jsonformatter>=0.3.2",
+    "MarkupSafe>=2.1.1",
+    "paho-mqtt>=1.6.1",
+    "prometheus-client>=0.15.0",
+    "pyhdb>=0.3.4",
+    "PyYAML>=6.0.1",
+    "waitress>=2.1.2",
+    "Werkzeug>=2.2.2",
+]
+
+[project.optional-dependencies]
+# docs extra — tools needed to build the project documentation with mkdocs.
+# Install with: uv sync --extra docs
+docs = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
+
+[project.urls]
+Source = "https://github.com/ZPascal/hana-injector"
+"Bug Tracker" = "https://github.com/ZPascal/hana-injector/issues"
+Documentation = "https://zpascal.github.io/hana-injector/"
+
+[project.scripts]
+hana-injector = "injector.app:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["injector*"]
+
+[dependency-groups]
+# generator — runtime dependency for the code generator step (black is used
+# by _format_converter_code to format the generated converter.py source file).
+# Install with: uv sync --group generator
+generator = [
+    "black>=26.5.1",
+]
+# dev — includes generator so tests can exercise the full generator pipeline
+dev = [
+    { include-group = "generator" },
+    "genbadge[coverage]",
+    "pytest",
+    "pytest-cov",
+    "ruff>=0.11.0",
+]
+
+# ---------------------------------------------------------------------------
+# black — code formatter (also used at runtime by the generator)
+# ---------------------------------------------------------------------------
+[tool.black]
+line-length = 120
+target-version = ["py310", "py311", "py312"]
+
+# ---------------------------------------------------------------------------
+# ruff — linter (black remains the formatter; ruff is linting only)
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 120  # must match black
+extend-exclude = [
+    "test/unittests/files/broker_mqtt/mqtt.py",
+    "test/unittests/files/converter/converter.py",
+    "test/unittests/files/database_sql/sql.py",
+    "injector/broker_mqtt/mqtt.py",
+    "injector/converter/converter.py",
+    "injector/database_sql/sql.py"
+]
+
+[tool.ruff.lint]
+# E/W: pycodestyle  F: pyflakes  I: isort  B: flake8-bugbear
+# C4: flake8-comprehensions  UP: pyupgrade  SIM: flake8-simplify
+select = ["E", "W", "F", "I", "B", "C4", "UP", "SIM"]
+ignore = [
+    "E203",   # whitespace before ':' — black-incompatible
+    "E501",   # line too long — handled by black
+    "B904",   # raise-without-from-inside-except — existing pattern
+    "SIM108", # ternary-operator suggestions
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["injector"]
+
+[tool.ruff.lint.per-file-ignores]
+"test/**" = ["B", "SIM"]

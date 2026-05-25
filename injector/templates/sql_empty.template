@@ -1,9 +1,9 @@
 import os
-import pyhdb
 import socket
 
+import pyhdb
+from custom_logger.logger import CustomLogger, HanaInjectorError
 from load_config.config import LoadConfig
-from custom_logger.logger import HanaInjectorError, CustomLogger
 
 
 class SQL:

@@ -19,11 +19,21 @@ After the transformation process, the core functionality of the tool is the inje
 ### Process flow
 The transformation process identify the elements and puts these variables in the SQL statement. For this process, the statements were defined before the application starts.  As soon as the transforming is done, the string is transformed to the HANA DB SQL format and can then be directly inserted to the HANA database.
 
+#### Dependency groups
+
+The project uses [uv dependency groups](https://docs.astral.sh/uv/concepts/dependencies/#dependency-groups) to separate concerns:
+
+| Group       | Contains                                                 | Install command             |
+|-------------|----------------------------------------------------------|-----------------------------|
+| `generator` | `black` – needed at runtime when the code generator runs | `uv sync --group generator` |
+| `dev`       | All of `generator` + `pytest`, `pytest-cov`, `ruff`, `genbadge[coverage]` | `uv sync --group dev`       |
+| `docs`      | `mkdocs`, `mkdocs-material`, `mkdocstrings[python]` for building documentation | `uv sync --extra docs` |
+
 ## Installation, startup and configuration
 ### Installation and startup
 #### Docker
 ```
-docker pull z9pascal/hana-injector:0.0.1-latest
+docker pull z9pascal/hana-injector:1.0.0-latest
 docker run -e HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml -v /storage:/storage -v ./config/config.yml:/storage/conf/config.yml -p 8080:8080 z9pascal/hana-injector:0.0.1-latest
 ```
 
@@ -36,8 +46,9 @@ hana-injector
 
 #### Manual
 
-1. Please clone the injector code inside your local environment and install the `python3-dev` dependencies and use `pip3 install -r requirements.txt` for other necessary libraries.
-2. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
+1. Please clone the injector code inside your local environment.
+2. Install all dependencies with `uv sync` (or `pip install -e .` for classic pip workflows).
+3. Modify the execution rights of the `app.py` file e.g. on Linux `chmod +x app.py`
 
 ### Configuration
 Before starting the application, you must ensure that both the MQTT server and the corresponding HANA DB server are running.
@@ -45,6 +56,23 @@ Before starting the application, you must ensure that both the MQTT server and t
 In case these preconditions are not set, the application will throw multiple errors and will eventually crash.
 
 You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable `HANA_INJECTOR_CONFIG_FILE_PATH` and to store the path of the configuration file inside the variable e.g. `HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml`.
+
+#### Environment Variables
+
+| Variable                         | Required | Default   | Description                                                                            |
+|----------------------------------|----------|-----------|----------------------------------------------------------------------------------------|
+| `HANA_INJECTOR_CONFIG_FILE_PATH` | ✅ Yes    | —         | Absolute or relative path to the YAML configuration file. Example: `config/config.yml` |
+| `HANA_INJECTOR_GENERATOR_MODE`   | ❌ No     | *(unset)* | Controls whether the code generator runs on startup. See details below.                |
+
+##### `HANA_INJECTOR_GENERATOR_MODE` in detail
+
+The generator creates the converter, MQTT callback and SQL query source files from the `generator` section of the configuration YAML. Its behaviour depends on how the variable is set:
+
+| Value                        | Behaviour                                                                                                                                                 |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *(not set)*                  | Generator **runs** on startup and writes the generated files. After the run the application internally sets the variable to `"False"`.                    |
+| `"True"`                     | Generator **runs** on startup (same as *not set*).                                                                                                        |
+| `"False"` or any other value | Generator is **skipped**. Use this when generated files already exist, e.g. in production containers where code was pre-generated during the image build. |
 
 #### Configuration Yaml
 
@@ -80,8 +108,8 @@ generator:
     mqtt_payload:
       - OrderID: "str"
       - OrderDate: "generateDatetime"
-      - Color: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
-      - Color2: "sep:ListDict(Name, Amount)|OrderID, OrderDate"
+      - Color: "sep:listDict(Name, Amount)|OrderID, OrderDate"
+      - Color2: "sep:listDict(Name, Amount)|OrderID, OrderDate"
       - CustomerName: "str"
     hana_sql_query:
       - "Test1"
@@ -95,7 +123,7 @@ generator:
       - OrderID: "str"
       - OrderDate: "generateDate"
       - CustomerName: "str"
-      - Color: "List"
+      - Color: "list"
     hana_sql_query:
       - "Test2"
       - "Test22"
@@ -115,9 +143,9 @@ generator:
 - **int** | Mapping value for a classical integer like `1`
 - **double**  | Mapping value for a classical double like `1.1`
 - **str**  | Mapping value for a classical string like `test`
-- **List**  | Mapping value for a classical list of values like `["test", "test1"]`
-- **ListDict** | Mapping value for a list of dictionaries like `[{"test": "test1"}, {"test1": "test2"}]`
-- **sep:ListDict** | Mapping value the functionality to separate values from MQTT stream and accumulate existing values from configuration/ stream and forward both together to the HANA database via a separate methode and query `sep:ListDict(Name, Amount)|OrderID, OrderDate`. For this datatype it's also necessary to specify the `hana_sql_query_sep` configuration option and forward the queries in the right order to the generator functionality.
+- **list**  | Mapping value for a classical list of values like `["test", "test1"]`
+- **listDict** | Mapping value for a list of dictionaries like `[{"test": "test1"}, {"test1": "test2"}]`
+- **sep:listDict** | Mapping value the functionality to separate values from MQTT stream and accumulate existing values from configuration/ stream and forward both together to the HANA database via a separate methode and query `sep:listDict(Name, Amount)|OrderID, OrderDate`. For this datatype it's also necessary to specify the `hana_sql_query_sep` configuration option and forward the queries in the right order to the generator functionality.
 - **Dict** | Mapping value for a dictionary like `{"test": "test1"}`
 - **generateDate** | Mapping value for the functionality to generate a date inside the following format `%Y-%m-%d`
 - **generateDatetime** | Mapping value for the functionality to generate a date time inside the following format `%Y-%m-%dT%H:%M:%SZ`
