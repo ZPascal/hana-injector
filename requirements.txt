@@ -17,7 +17,7 @@ paho-mqtt==1.6.1
 pathspec==1.1.1
 platformdirs==2.5.2
 prometheus-client==0.15.0
-pycparser==2.21
+pycparser==3.0
 pyhdb==0.3.4
 PyYAML==6.0.1
 regex==2022.10.31
