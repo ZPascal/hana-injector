@@ -330,15 +330,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-and-configuration" class="md-nav__link">
+  <a href="#installation-startup-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Installation, startup and configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation and configuration">
+    <nav class="md-nav" aria-label="Installation, startup and configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -349,6 +349,34 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -363,6 +391,34 @@
   
     <nav class="md-nav" aria-label="Configuration">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hana_injector_generator_mode-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HANA_INJECTOR_GENERATOR_MODE in detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#configuration-yaml" class="md-nav__link">
@@ -720,15 +776,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-and-configuration" class="md-nav__link">
+  <a href="#installation-startup-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Installation, startup and configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation and configuration">
+    <nav class="md-nav" aria-label="Installation, startup and configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -739,6 +795,34 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -753,6 +837,34 @@
   
     <nav class="md-nav" aria-label="Configuration">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hana_injector_generator_mode-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HANA_INJECTOR_GENERATOR_MODE in detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#configuration-yaml" class="md-nav__link">
@@ -913,17 +1025,72 @@
 After the transformation process, the core functionality of the tool is the injection of the modified and transformed MQTT stream and in the meantime already a Hana database query to the attached and configured SAP Hana database.</p>
 <h3 id="process-flow">Process flow</h3>
 <p>The transformation process identify the elements and puts these variables in the SQL statement. For this process, the statements were defined before the application starts.  As soon as the transforming is done, the string is transformed to the HANA DB SQL format and can then be directly inserted to the HANA database.</p>
-<h2 id="installation-and-configuration">Installation and configuration</h2>
+<h2 id="installation-startup-and-configuration">Installation, startup and configuration</h2>
 <h3 id="installation">Installation</h3>
+<h4 id="pypi">PyPi</h4>
+<pre><code>pip install hana-injector
+export HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml
+hana-injector
+</code></pre>
+<h4 id="manual">Manual</h4>
 <ol>
-<li>Please clone the injector code inside your local environment and install all required dependencies via <code>pip3 install -r requirements.txt</code> for the application.</li>
+<li>Please clone the injector code inside your local environment.</li>
+<li>Install all dependencies with <code>uv sync</code> (or <code>pip install -e .</code> for classic pip workflows).</li>
 <li>Modify the execution rights of the <code>app.py</code> file e.g. on Linux <code>chmod +x app.py</code></li>
 </ol>
 <h3 id="configuration">Configuration</h3>
 <p>Before starting the application, you must ensure that both the MQTT server and the corresponding HANA DB server are running.</p>
 <p>In case these preconditions are not set, the application will throw multiple errors and will eventually crash.</p>
-<p>You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable <code>HANA_INJECTOR_CONFIG_FILE_PATH</code> and to store the path of the configuration file inside the variable e.g. <code>HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml</code>.
-For the startup of the application it's required to call the <code>app.py</code> script e.g. <code>python3 app.py</code>.</p>
+<p>You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable <code>HANA_INJECTOR_CONFIG_FILE_PATH</code> and to store the path of the configuration file inside the variable e.g. <code>HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml</code>.</p>
+<h4 id="environment-variables">Environment Variables</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HANA_INJECTOR_CONFIG_FILE_PATH</code></td>
+<td>✅ Yes</td>
+<td>—</td>
+<td>Absolute or relative path to the YAML configuration file. Example: <code>config/config.yml</code></td>
+</tr>
+<tr>
+<td><code>HANA_INJECTOR_GENERATOR_MODE</code></td>
+<td>❌ No</td>
+<td><em>(unset)</em></td>
+<td>Controls whether the code generator runs on startup. See details below.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="hana_injector_generator_mode-in-detail"><code>HANA_INJECTOR_GENERATOR_MODE</code> in detail</h5>
+<p>The generator creates the converter, MQTT callback and SQL query source files from the <code>generator</code> section of the configuration YAML. Its behaviour depends on how the variable is set:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(not set)</em></td>
+<td>Generator <strong>runs</strong> on startup and writes the generated files. After the run the application internally sets the variable to <code>"False"</code>.</td>
+</tr>
+<tr>
+<td><code>"True"</code></td>
+<td>Generator <strong>runs</strong> on startup (same as <em>not set</em>).</td>
+</tr>
+<tr>
+<td><code>"False"</code> or any other value</td>
+<td>Generator is <strong>skipped</strong>. Use this when generated files already exist, e.g. in production containers where code was pre-generated during the image build.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="configuration-yaml">Configuration Yaml</h4>
 <pre><code class="language-yaml">hana_injector:
   secret_key: &quot;test&quot;
