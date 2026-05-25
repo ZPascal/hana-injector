@@ -26,5 +26,5 @@ setuptools==82.0.0
 toml==0.10.2
 tomli==2.4.1
 typing_extensions==4.12.2
-waitress==2.1.2
+waitress==3.0.2
 Werkzeug==2.2.2
