@@ -66,6 +66,7 @@ generator = [
 # dev — includes generator so tests can exercise the full generator pipeline
 dev = [
     { include-group = "generator" },
+    "build",
     "genbadge[coverage]",
     "pytest",
     "pytest-cov",
