@@ -107,7 +107,7 @@ jobs:
           uv run pytest --junitxml=pytest.xml --cov=. --cov-report=xml:coverage.xml | tee pytest-coverage.txt
 
       - name: Execute the coverage checks
-        uses: MishaKav/pytest-coverage-comment@v1.10.0
+        uses: MishaKav/pytest-coverage-comment@v1.11.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-coverage-path: ./test/unittests/pytest-coverage.txt
