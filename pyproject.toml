@@ -1,6 +1,6 @@
 [project]
 name = "hana-injector"
-version = "1.0.0"
+version = "1.0.1"
 description = "An MQTT stream to SAP HANA database injector"
 readme = "docs/content/index.md"
 requires-python = ">=3.10"
