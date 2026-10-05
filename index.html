@@ -1,0 +1,1239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="injector/generator/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Hana Injector</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hana-injector" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Hana Injector" class="md-header__button md-logo" aria-label="Hana Injector" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hana Injector
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ZPascal/hana-injector" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZPascal/hana-injector
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Hana Injector" class="md-nav__button md-logo" aria-label="Hana Injector" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Hana Injector
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ZPascal/hana-injector" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZPascal/hana-injector
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-information-about-the-application-and-key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic information about the application and key features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-and-functional-principles-of-the-hana-injector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture and functional principles of the Hana Injector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture and functional principles of the Hana Injector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-startup-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation, startup and configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation, startup and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hana_injector_generator_mode-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HANA_INJECTOR_GENERATOR_MODE in detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-mapping-types-and-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported mapping types and function
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Api Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Api Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swagger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#donations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Donations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hana Injector
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hana Injector
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="injector/generator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="injector/logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="injector/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-information-about-the-application-and-key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic information about the application and key features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-and-functional-principles-of-the-hana-injector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture and functional principles of the Hana Injector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture and functional principles of the Hana Injector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-startup-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation, startup and configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation, startup and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hana_injector_generator_mode-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HANA_INJECTOR_GENERATOR_MODE in detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-mapping-types-and-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported mapping types and function
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Api Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Api Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swagger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#donations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Donations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="hana-injector">Hana Injector</h1>
+<p>MQTT stream to SAP Hana database converter and forwarder API.</p>
+<p>The following application was created by a project with the purpose to connect MQTT parts with the SAP HANA DB. The goal was to implement an application that is capable of transforming incoming MQTT topics to a SQL format that is compliant with the Hana DB, as the original data was streamed with MQTT, whereas the HANA database was only able to receive data sent in Hana SQL format.</p>
+<h2 id="basic-information-about-the-application-and-key-features">Basic information about the application and key features</h2>
+<p>The Hana Injector is based on a Python Flask microservice architecture. Therefore, one of the key features of the application is the low consumption of resources, as the framework allows for the efficient distribution and usage of resources in general.</p>
+<p>Furthermore, the architecture includes multiple packages, such as the Python <a href="https://pypi.org/project/paho-mqtt/#description">MQTT Paho client</a> and the <a href="https://pypi.org/project/pyhdb/#description">PyHDB</a> library.</p>
+<p>The features of this application are the conversion process in SQL, the element identification and the insertion into the HANA DB.</p>
+<h2 id="architecture-and-functional-principles-of-the-hana-injector">Architecture and functional principles of the Hana Injector</h2>
+<h3 id="architecture">Architecture</h3>
+<p>The service based on a microservice architecture and the Python Flask framework. The application include a Prometheus metric endpoint and a code generator to produce the corresponding functions and transformation code to forward/ modify the incoming MQTT stream. 
+After the transformation process, the core functionality of the tool is the injection of the modified and transformed MQTT stream and in the meantime already a Hana database query to the attached and configured SAP Hana database.</p>
+<h3 id="process-flow">Process flow</h3>
+<p>The transformation process identify the elements and puts these variables in the SQL statement. For this process, the statements were defined before the application starts.  As soon as the transforming is done, the string is transformed to the HANA DB SQL format and can then be directly inserted to the HANA database.</p>
+<h2 id="installation-startup-and-configuration">Installation, startup and configuration</h2>
+<h3 id="installation">Installation</h3>
+<h4 id="pypi">PyPi</h4>
+<pre><code>pip install hana-injector
+export HANA_INJECTOR_CONFIG_FILE_PATH=/storage/conf/config.yml
+hana-injector
+</code></pre>
+<h4 id="manual">Manual</h4>
+<ol>
+<li>Please clone the injector code inside your local environment.</li>
+<li>Install all dependencies with <code>uv sync</code> (or <code>pip install -e .</code> for classic pip workflows).</li>
+<li>Modify the execution rights of the <code>app.py</code> file e.g. on Linux <code>chmod +x app.py</code></li>
+</ol>
+<h3 id="configuration">Configuration</h3>
+<p>Before starting the application, you must ensure that both the MQTT server and the corresponding HANA DB server are running.</p>
+<p>In case these preconditions are not set, the application will throw multiple errors and will eventually crash.</p>
+<p>You set up all related configuration parameters like the Hana and MQTT credentials and channels inside the configuration YAML file. You can check out the predefined example configuration inside the next paragraph. To specify the used configuration file it's necessary to set up the env variable <code>HANA_INJECTOR_CONFIG_FILE_PATH</code> and to store the path of the configuration file inside the variable e.g. <code>HANA_INJECTOR_CONFIG_FILE_PATH=config/config.yml</code>.</p>
+<h4 id="environment-variables">Environment Variables</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HANA_INJECTOR_CONFIG_FILE_PATH</code></td>
+<td>✅ Yes</td>
+<td>—</td>
+<td>Absolute or relative path to the YAML configuration file. Example: <code>config/config.yml</code></td>
+</tr>
+<tr>
+<td><code>HANA_INJECTOR_GENERATOR_MODE</code></td>
+<td>❌ No</td>
+<td><em>(unset)</em></td>
+<td>Controls whether the code generator runs on startup. See details below.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="hana_injector_generator_mode-in-detail"><code>HANA_INJECTOR_GENERATOR_MODE</code> in detail</h5>
+<p>The generator creates the converter, MQTT callback and SQL query source files from the <code>generator</code> section of the configuration YAML. Its behaviour depends on how the variable is set:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(not set)</em></td>
+<td>Generator <strong>runs</strong> on startup and writes the generated files. After the run the application internally sets the variable to <code>"False"</code>.</td>
+</tr>
+<tr>
+<td><code>"True"</code></td>
+<td>Generator <strong>runs</strong> on startup (same as <em>not set</em>).</td>
+</tr>
+<tr>
+<td><code>"False"</code> or any other value</td>
+<td>Generator is <strong>skipped</strong>. Use this when generated files already exist, e.g. in production containers where code was pre-generated during the image build.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="configuration-yaml">Configuration Yaml</h4>
+<pre><code class="language-yaml">hana_injector:
+  secret_key: &quot;test&quot;
+  log_mode: &quot;debug&quot;
+  template: &quot;injector/templates&quot;
+  host: &quot;localhost&quot;
+  port: 8080
+  threads: 4
+
+mqtt:
+  hostname: &quot;localhost&quot;
+  port: 3555
+  username: &quot;3555&quot;
+  password: &quot;3555&quot;
+  subscribed_topics:
+    - name: &quot;Test1&quot;
+      qos: 0
+    - name: &quot;Test2&quot;
+      qos: 0
+
+hana_database:
+  hostname: &quot;Test&quot;
+  port: 123
+  username: &quot;test&quot;
+  password: &quot;Test&quot;
+
+generator:
+  - method_name: &quot;Service1&quot;
+    mqtt_topic: &quot;Service11&quot;
+    mqtt_payload:
+      - OrderID: &quot;str&quot;
+      - OrderDate: &quot;generateDatetime&quot;
+      - Color: &quot;sep:listDict(Name, Amount)|OrderID, OrderDate&quot;
+      - Color2: &quot;sep:listDict(Name, Amount)|OrderID, OrderDate&quot;
+      - CustomerName: &quot;str&quot;
+    hana_sql_query:
+      - &quot;Test1&quot;
+    hana_sql_query_sep:
+      - &quot;Test1_sep&quot;
+      - &quot;Test2_sep&quot;
+
+  - method_name: &quot;Service2&quot;
+    mqtt_topic: &quot;Service21&quot;
+    mqtt_payload:
+      - OrderID: &quot;str&quot;
+      - OrderDate: &quot;generateDate&quot;
+      - CustomerName: &quot;str&quot;
+      - Color: &quot;list&quot;
+    hana_sql_query:
+      - &quot;Test2&quot;
+      - &quot;Test22&quot;
+
+  - method_name: &quot;Service3&quot;
+    mqtt_topic: &quot;Service31&quot;
+    mqtt_payload:
+      - OrderID: &quot;str&quot;
+      - DeviceID: &quot;str&quot;
+      - OrderDate: &quot;str&quot;
+      - StatusCode: &quot;str&quot;
+    hana_sql_query:
+      - &quot;Test3&quot;
+</code></pre>
+<h4 id="supported-mapping-types-and-function">Supported mapping types and function</h4>
+<ul>
+<li><strong>int</strong> | Mapping value for a classical integer like <code>1</code></li>
+<li><strong>double</strong>  | Mapping value for a classical double like <code>1.1</code></li>
+<li><strong>str</strong>  | Mapping value for a classical string like <code>test</code></li>
+<li><strong>list</strong>  | Mapping value for a classical list of values like <code>["test", "test1"]</code></li>
+<li><strong>listDict</strong> | Mapping value for a list of dictionaries like <code>[{"test": "test1"}, {"test1": "test2"}]</code></li>
+<li><strong>sep:listDict</strong> | Mapping value the functionality to separate values from MQTT stream and accumulate existing values from configuration/ stream and forward both together to the HANA database via a separate methode and query <code>sep:listDict(Name, Amount)|OrderID, OrderDate</code>. For this datatype it's also necessary to specify the <code>hana_sql_query_sep</code> configuration option and forward the queries in the right order to the generator functionality.</li>
+<li><strong>Dict</strong> | Mapping value for a dictionary like <code>{"test": "test1"}</code></li>
+<li><strong>generateDate</strong> | Mapping value for the functionality to generate a date inside the following format <code>%Y-%m-%d</code></li>
+<li><strong>generateDatetime</strong> | Mapping value for the functionality to generate a date time inside the following format <code>%Y-%m-%dT%H:%M:%SZ</code></li>
+</ul>
+<h3 id="api-endpoints">Api Endpoints</h3>
+<h4 id="health">Health</h4>
+<p>The corresponding app includes a health endpoint to check the status of the application. You can call the <code>/health</code> page to get the corresponding status of the app.</p>
+<h4 id="metrics">Metrics</h4>
+<p>The corresponding app includes a Prometheus metric endpoint to get the metrics of the application. You can call the <code>/metrics</code> page to get the corresponding metrics of the app.</p>
+<h4 id="swagger">Swagger</h4>
+<p>The corresponding app includes a documentation endpoint to check the documentation pages of the API. You can call the <code>/api/docs</code> page to get the corresponding documentation pages.</p>
+<h2 id="contribution">Contribution</h2>
+<p>If you would like to contribute, have an improvement request, or want to make a change inside the code, please open a pull request and write unit tests.</p>
+<h2 id="support">Support</h2>
+<p>If you need support, or you encounter a bug, please don't hesitate to open an issue.</p>
+<h2 id="donations">Donations</h2>
+<p>If you would like to support my work, I ask you to take an unusual action inside the open source community. Donate the money to a non-profit organization like Doctors Without Borders or the Children's Cancer Aid. I will continue to build tools because I like it and it is my passion to develop and share applications.</p>
+<h2 id="license">License</h2>
+<p>This product is available under the Apache 2.0.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
